@@ -1,9 +1,17 @@
 "use strict";
-const canvas_element = document.getElementById("canvas");
+var canvas;
 function resizeCanvas() {
     console.log("resized canvas");
-    canvas_element.width = 200;
-    canvas_element.height = 300;
+    canvas.width = window.innerWidth - 10;
+    canvas.height = window.innerHeight - 10;
 }
-window.onresize = resizeCanvas;
-window.onload = resizeCanvas;
+window.onload = () => {
+    canvas = document.getElementById("canvas");
+    resizeCanvas();
+    console.log(`${canvas.width}, ${canvas.height}`);
+};
+window.onresize = () => {
+    console.log;
+    resizeCanvas();
+    console.log(`${canvas.width}, ${canvas.height}`);
+};

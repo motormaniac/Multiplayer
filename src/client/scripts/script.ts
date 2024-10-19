@@ -1,10 +1,15 @@
-const canvas_element:any = document.getElementById("canvas")
+var canvas:HTMLCanvasElement;
 
-function resizeCanvas():void {
-    console.log("resized canvas")
-    canvas_element.width = 200;
-    canvas_element.height = 300;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
 
-window.onresize = resizeCanvas;
-window.onload = resizeCanvas;
+window.onload = ()=>{
+    canvas = <HTMLCanvasElement>document.getElementById("canvas");
+    resizeCanvas();
+};
+
+window.onresize = ()=>{
+    resizeCanvas();
+};

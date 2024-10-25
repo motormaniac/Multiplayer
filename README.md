@@ -1,5 +1,5 @@
 # multiplayer
-//WARNING: This game is still in development
+A technical demo for an online multiplayer .io game
 
 - TODO list
 - [ ] Add the webpack module (module manager)

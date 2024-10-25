@@ -1,3 +1,5 @@
+import { startAnimation } from "./animate";
+
 var canvas:HTMLCanvasElement;
 
 function resizeCanvas() {
@@ -7,6 +9,7 @@ function resizeCanvas() {
 
 window.onload = ()=>{
     canvas = <HTMLCanvasElement>document.getElementById("canvas");
+    startAnimation();
     resizeCanvas();
 };
 

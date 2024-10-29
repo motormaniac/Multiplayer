@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.startAnimation = startAnimation;
 exports.stopAnimation = stopAnimation;
 let animationId = 0; //the current id of the animation frame (requestAnimationFrame returns its id)
-function startAnimation() {
+let context;
+function startAnimation(ctx) {
+    context = ctx;
     animationId = requestAnimationFrame(update);
 }
 function stopAnimation() {
@@ -11,4 +13,6 @@ function stopAnimation() {
 }
 function update() {
     animationId = requestAnimationFrame(update);
+    context.fillStyle = "#ffffff";
+    context.fillRect(100, 100, 50, 50);
 }

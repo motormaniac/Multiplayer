@@ -5,5 +5,14 @@ body {
     padding:0;
 }
 canvas {
-    border: 1px solid white
+    position:absolute;
+    z-index: -1;
+    border:1px solid white;
+}
+p {
+    position:fixed;
+    left:auto;
+    width:25%;
+    border: 1px solid white;
+    color:white;
 }

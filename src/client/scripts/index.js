@@ -33,6 +33,7 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 window.onload = () => {
+    animate.stopAnimation();
     let tempCanvas = document.getElementById("canvas");
     if (tempCanvas === null) {
         throw "Canvas is null";
@@ -43,7 +44,7 @@ window.onload = () => {
         throw "Canvas Context is null";
     }
     context = tempContext;
-    animate.startAnimation(context);
+    animate.startAnimation(canvas, context);
     resizeCanvas();
 };
 window.onresize = () => {

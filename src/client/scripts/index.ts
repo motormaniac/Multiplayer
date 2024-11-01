@@ -11,6 +11,7 @@ function resizeCanvas() {
 }
 
 window.onload = ()=>{
+    animate.stopAnimation();
     let tempCanvas = document.getElementById("canvas")
     if (tempCanvas === null) {
         throw "Canvas is null"
@@ -23,7 +24,7 @@ window.onload = ()=>{
     }
     context = tempContext
 
-    animate.startAnimation(context);
+    animate.startAnimation(canvas,context);
     resizeCanvas();
 };
 

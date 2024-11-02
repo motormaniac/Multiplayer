@@ -1,6 +1,11 @@
 /**Time since window was loaded at the beginning of each frame (milliseconds)*/
 var frameTime:DOMHighResTimeStamp = 0;
 
+interface TempVector2 {
+    x:number;
+    y:number;
+}
+
 interface inputLookupType {
     //arbitrary amount of keys whose value has type ComputerInput
     [key:string]:ComputerInput
@@ -11,18 +16,19 @@ interface inputLookupType {
  * Example: inputs.right.keyDown() --> true/false
 */
 export var inputs:inputLookupType;
+export var mousePos:TempVector2 = {x:0, y:0};
+export var mouseOffset:TempVector2 = {x:0, y:0};
 
-class ComputerInput {
+class BasicInput {
     /**Look up table; uses keyboard event code to find associated ComputerInput object */
-    static inputMap: Map<string, ComputerInput> = new Map<string, ComputerInput>();
-    /**Fills inputMap with ComputerInput instances */
-    static initInputMap(): Map<string, ComputerInput> {
+    static inputMap: Map<string, BasicInput> = new Map<string, BasicInput>();
+    /**Fills inputMap with BasicInput instances */
+    static initInputMap(): Map<string, BasicInput> {
         for (let value of Object.values(inputs)) { //iterates through the object
-            ComputerInput.inputMap.set(value.keyCode, value);
+            BasicInput.inputMap.set(value.code, value);
         }
         return this.inputMap;
     }
-
     /**Initializes the global variable 'inputs' with instances of ComputerInput*/
     static initInputs() {
         inputs = {
@@ -32,8 +38,9 @@ class ComputerInput {
             , down: new ComputerInput("KeyS")
         };
     }
+
     /**Corresponding keycode (event.code) */
-    keyCode: string = "";
+    code: string = "";
     isPressed:boolean = false;
     /**Time when key was pressed (millis) */
     keyDownTime: number = 0;
@@ -44,13 +51,21 @@ class ComputerInput {
     /**optional callback activated whenever this key is released */
     onKeyUp:Function = () => { }
 
+    setKeyDown(event:UIEvent) {}
+    setKeyUp(event:UIEvent) {}
+
+}
+
+class ComputerInput extends BasicInput {
+
     /**
      * @param code corresponding keycode (event.code)
      * @param onKeyDown optional callback when key is pressed
      * @param onKeyUp optional callback when key is released
      */
     constructor(code: string, onKeyDown:Function = () => { }, onKeyUp:Function = () => { }) {
-        this.keyCode = code;
+        super()
+        this.code = code;
         this.onKeyDown = onKeyDown
         this.onKeyUp = onKeyUp
     }
@@ -73,6 +88,11 @@ class ComputerInput {
     }
 }
 
+class MouseInput extends BasicInput {
+    setKeyDown(event: MouseEvent): void {
+        
+    }
+}
 
 /**Called at the beginning of every frame */
 export function inputUpdate(time: DOMHighResTimeStamp) {
@@ -80,16 +100,28 @@ export function inputUpdate(time: DOMHighResTimeStamp) {
 }
 
 export function keyDown(event: KeyboardEvent): void {
-    console.log(event.code);
     let input = ComputerInput.inputMap.get(event.code);
     if (input) { input.setKeyDown(event); }
 }
 
 export function keyUp(event: KeyboardEvent): void {
-    console.log(event.code);
     let input = ComputerInput.inputMap.get(event.code);
     if (input) { input.setKeyUp(event); }
 }
 
-ComputerInput.initInputs();
-ComputerInput.initInputMap();
+export function mouseMove(event:MouseEvent):void {
+    mousePos.x = event.clientX;
+    mousePos.y = event.clientY;
+    mouseOffset.x = event.movementX
+    mouseOffset.y = event.movementY
+}
+
+export function mouseDown(event:MouseEvent):void {
+    console.log("mosuedown");
+}
+export function mouseUp(event:MouseEvent):void {
+    console.log("mouseup")
+}
+
+BasicInput.initInputs();
+BasicInput.initInputMap();

@@ -52,3 +52,6 @@ window.onresize = () => {
 };
 window.onkeydown = input.keyDown;
 window.onkeyup = input.keyUp;
+window.onmousemove = input.mouseMove;
+window.onmousedown = input.mouseDown;
+window.onmouseup = input.mouseUp;

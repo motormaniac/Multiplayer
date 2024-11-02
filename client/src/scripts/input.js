@@ -1,16 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inputs = void 0;
+exports.mouseOffset = exports.mousePos = exports.inputs = void 0;
 exports.inputUpdate = inputUpdate;
 exports.keyDown = keyDown;
 exports.keyUp = keyUp;
+exports.mouseMove = mouseMove;
+exports.mouseDown = mouseDown;
+exports.mouseUp = mouseUp;
 /**Time since window was loaded at the beginning of each frame (milliseconds)*/
 var frameTime = 0;
-class ComputerInput {
-    /**Fills inputMap with ComputerInput instances */
+exports.mousePos = { x: 0, y: 0 };
+exports.mouseOffset = { x: 0, y: 0 };
+class BasicInput {
+    constructor() {
+        /**Corresponding keycode (event.code) */
+        this.code = "";
+        this.isPressed = false;
+        /**Time when key was pressed (millis) */
+        this.keyDownTime = 0;
+        /**Time when key was released (millis) */
+        this.keyUpTime = 0;
+        /**optional callback activated whenever this key is pressed */
+        this.onKeyDown = () => { };
+        /**optional callback activated whenever this key is released */
+        this.onKeyUp = () => { };
+    }
+    /**Fills inputMap with BasicInput instances */
     static initInputMap() {
         for (let value of Object.values(exports.inputs)) { //iterates through the object
-            ComputerInput.inputMap.set(value.keyCode, value);
+            BasicInput.inputMap.set(value.code, value);
         }
         return this.inputMap;
     }
@@ -23,24 +41,20 @@ class ComputerInput {
             down: new ComputerInput("KeyS")
         };
     }
+    setKeyDown(event) { }
+    setKeyUp(event) { }
+}
+/**Look up table; uses keyboard event code to find associated ComputerInput object */
+BasicInput.inputMap = new Map();
+class ComputerInput extends BasicInput {
     /**
      * @param code corresponding keycode (event.code)
      * @param onKeyDown optional callback when key is pressed
      * @param onKeyUp optional callback when key is released
      */
     constructor(code, onKeyDown = () => { }, onKeyUp = () => { }) {
-        /**Corresponding keycode (event.code) */
-        this.keyCode = "";
-        this.isPressed = false;
-        /**Time when key was pressed (millis) */
-        this.keyDownTime = 0;
-        /**Time when key was released (millis) */
-        this.keyUpTime = 0;
-        /**optional callback activated whenever this key is pressed */
-        this.onKeyDown = () => { };
-        /**optional callback activated whenever this key is released */
-        this.onKeyUp = () => { };
-        this.keyCode = code;
+        super();
+        this.code = code;
         this.onKeyDown = onKeyDown;
         this.onKeyUp = onKeyUp;
     }
@@ -62,25 +76,37 @@ class ComputerInput {
         return this.keyUpTime <= frameTime && frameTime <= this.keyDownTime;
     }
 }
-/**Look up table; uses keyboard event code to find associated ComputerInput object */
-ComputerInput.inputMap = new Map();
+class MouseInput extends BasicInput {
+    setKeyDown(event) {
+    }
+}
 /**Called at the beginning of every frame */
 function inputUpdate(time) {
     frameTime = time;
 }
 function keyDown(event) {
-    console.log(event.code);
     let input = ComputerInput.inputMap.get(event.code);
     if (input) {
         input.setKeyDown(event);
     }
 }
 function keyUp(event) {
-    console.log(event.code);
     let input = ComputerInput.inputMap.get(event.code);
     if (input) {
         input.setKeyUp(event);
     }
 }
-ComputerInput.initInputs();
-ComputerInput.initInputMap();
+function mouseMove(event) {
+    exports.mousePos.x = event.clientX;
+    exports.mousePos.y = event.clientY;
+    exports.mouseOffset.x = event.movementX;
+    exports.mouseOffset.y = event.movementY;
+}
+function mouseDown(event) {
+    console.log("mosuedown");
+}
+function mouseUp(event) {
+    console.log("mouseup");
+}
+BasicInput.initInputs();
+BasicInput.initInputMap();

@@ -1,1 +1,1 @@
-{"root":["./src/client/scripts/animate.ts","./src/client/scripts/index.ts","./src/client/scripts/input.ts"],"version":"5.6.3"}
+{"root":["./client/src/scripts/animate.ts","./client/src/scripts/index.ts","./client/src/scripts/input.ts"],"version":"5.6.3"}

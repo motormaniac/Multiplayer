@@ -1,4 +1,4 @@
-import { inputs, inputUpdate } from "./input";
+import { inputs, inputUpdate, mousePos} from "./input";
 
 let animationId = 0; //the current id of the animation frame (requestAnimationFrame returns its id)
 
@@ -37,4 +37,6 @@ function update():void {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(x,y,50,50);
+    ctx.fillStyle = "#ff0000";
+    ctx.fillRect(mousePos.x, mousePos.y, 25,25)
 }

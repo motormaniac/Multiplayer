@@ -34,4 +34,6 @@ function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(x, y, 50, 50);
+    ctx.fillStyle = "#ff0000";
+    ctx.fillRect(input_1.mousePos.x, input_1.mousePos.y, 25, 25);
 }

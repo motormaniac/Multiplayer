@@ -1,0 +1,1 @@
+call node ./dist/main.js

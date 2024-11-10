@@ -1,9 +1,15 @@
 const dotenv = require("dotenv").config();
-const express = require("express");
-const app = express();
+import express, {Express, Request, Response} from "express";
+const app:Express = express();
 
-console.log(process.env.PORT)
+app.listen(process.env.PORT, ()=>{
+    console.log("Listening on port 8080")
+})
 
-// app.listen(8080, ()=>{
-//     console.log("Listening on port 8080")
-// })
+app.use("/static", express.static("static"))
+
+app.get("/", (req:Request, res:Response) => {
+    console.log("worked");
+    console.log(req.hostname);
+    res.send(req.hostname);
+})

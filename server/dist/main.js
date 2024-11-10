@@ -1229,10 +1229,10 @@ eval("/*!\n * vary\n * Copyright(c) 2014-2017 Douglas Christopher Wilson\n * MIT
 /*!**********************************!*\
   !*** ./src/js_compiled/index.js ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nconst dotenv = (__webpack_require__(/*! dotenv */ \"../node_modules/dotenv/lib/main.js\").config)();\nconst express = __webpack_require__(/*! express */ \"../node_modules/express/index.js\");\nconst app = express();\nconsole.log(process.env.PORT);\n// app.listen(8080, ()=>{\n//     console.log(\"Listening on port 8080\")\n// })\n\n\n//# sourceURL=webpack:///./src/js_compiled/index.js?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst dotenv = (__webpack_require__(/*! dotenv */ \"../node_modules/dotenv/lib/main.js\").config)();\nconst express_1 = __importDefault(__webpack_require__(/*! express */ \"../node_modules/express/index.js\"));\nconst app = (0, express_1.default)();\napp.listen(process.env.PORT, () => {\n    console.log(\"Listening on port 8080\");\n});\napp.use(\"/static\", express_1.default.static(\"static\"));\napp.get(\"/\", (req, res) => {\n    console.log(\"worked\");\n    console.log(req.hostname);\n    res.send(req.hostname);\n});\n\n\n//# sourceURL=webpack:///./src/js_compiled/index.js?");
 
 /***/ }),
 
@@ -1478,7 +1478,7 @@ eval("module.exports = /*#__PURE__*/JSON.parse('{\"100\":\"Continue\",\"101\":\"
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/js_compiled/index.js");
 /******/ 	
 /******/ })()

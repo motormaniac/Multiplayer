@@ -4,3 +4,5 @@ call npx tsc --build
 call npx webpack --config webpack.config.js
 ::copy dist folders from client into server static folder
 call copy ..\client\dist .\static
+::Run the server
+call node index.js

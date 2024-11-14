@@ -1,12 +1,11 @@
-//This file will eventually be compiled and run in the server directory. Thus, __dirname = /server
+//This file will eventually be compiled and run in the server directory. Thus, __dirname = "/server"
 
 require("dotenv").config()
 import express, {Express, NextFunction, Request, Response} from "express";
 import path from "path";
 const app:Express = express();
 
-//this is the server root file directory (/server) relative to this file location.
-//This code must change when the file is executed from a different location
+if (!process.env) throw "env is undefined. Try making a .env file?";
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Listening on port ${process.env.PORT}`)

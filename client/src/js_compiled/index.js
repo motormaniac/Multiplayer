@@ -22,36 +22,49 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-//the ES equivalent of node 'const module = require("module")
 const animate = __importStar(require("./animate"));
 const input = __importStar(require("./input"));
-var canvas;
-var context;
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-window.onload = () => {
-    animate.stopAnimation();
-    let tempCanvas = document.getElementById("canvas");
-    if (tempCanvas === null) {
-        throw "Canvas is null";
-    }
-    canvas = tempCanvas;
-    let tempContext = canvas.getContext("2d");
-    if (tempContext === null) {
-        throw "Canvas Context is null";
-    }
-    context = tempContext;
-    animate.startAnimation(canvas, context);
-    resizeCanvas();
-};
-window.onresize = () => {
-    resizeCanvas();
-};
+window.onload = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield animate.initPixi(document.body);
+});
 window.onkeydown = input.keyDown;
 window.onkeyup = input.keyUp;
 window.onmousemove = input.mouseMove;
 window.onmousedown = input.mouseDown;
 window.onmouseup = input.mouseUp;
+// //the ES equivalent of node 'const module = require("module")
+// import * as animate from "./animate";
+// let canvas:HTMLCanvasElement;
+// let context:CanvasRenderingContext2D;
+// function resizeCanvas() {
+//     canvas.width = window.innerWidth;
+//     canvas.height = window.innerHeight;
+// }
+// window.onload = ()=>{    
+//     animate.stopAnimation();
+//     let tempCanvas = document.getElementById("canvas")
+//     if (tempCanvas === null) {
+//         throw "Canvas is null"
+//     }
+//     canvas = <HTMLCanvasElement>tempCanvas;
+//     let tempContext = canvas.getContext("2d");
+//     if (tempContext === null) {
+//         throw "Canvas Context is null"
+//     }
+//     context = tempContext
+//     animate.startAnimation(canvas,context);
+//     resizeCanvas();
+// };
+// window.onresize = ()=>{
+//     resizeCanvas();
+// };

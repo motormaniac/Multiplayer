@@ -8,7 +8,7 @@ exports.mouseMove = mouseMove;
 exports.mouseDown = mouseDown;
 exports.mouseUp = mouseUp;
 /**Time since window was loaded at the beginning of each frame (milliseconds)*/
-var frameTime = 0;
+let frameTime = 0;
 exports.mousePos = { x: 0, y: 0 };
 exports.mouseOffset = { x: 0, y: 0 };
 class BasicInput {
@@ -81,8 +81,8 @@ class MouseInput extends BasicInput {
     }
 }
 /**Called at the beginning of every frame */
-function inputUpdate(time) {
-    frameTime = time;
+function inputUpdate() {
+    frameTime = performance.now();
 }
 function keyDown(event) {
     let input = ComputerInput.inputMap.get(event.code);

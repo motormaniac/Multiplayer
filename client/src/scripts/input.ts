@@ -1,5 +1,7 @@
+import {elapsedTime} from "./animate"
+
 /**Time since window was loaded at the beginning of each frame (milliseconds)*/
-var frameTime:DOMHighResTimeStamp = 0;
+let frameTime:number = 0;
 
 interface TempVector2 {
     x:number;
@@ -15,9 +17,9 @@ interface inputLookupType {
  * inputs.keyIdentifier.ComputerInputObjectProperties
  * Example: inputs.right.keyDown() --> true/false
 */
-export var inputs:inputLookupType;
-export var mousePos:TempVector2 = {x:0, y:0};
-export var mouseOffset:TempVector2 = {x:0, y:0};
+export let inputs:inputLookupType;
+export let mousePos:TempVector2 = {x:0, y:0};
+export let mouseOffset:TempVector2 = {x:0, y:0};
 
 class BasicInput {
     /**Look up table; uses keyboard event code to find associated ComputerInput object */
@@ -95,8 +97,8 @@ class MouseInput extends BasicInput {
 }
 
 /**Called at the beginning of every frame */
-export function inputUpdate(time: DOMHighResTimeStamp) {
-    frameTime = time;
+export function inputUpdate() {
+    frameTime = performance.now();
 }
 
 export function keyDown(event: KeyboardEvent): void {

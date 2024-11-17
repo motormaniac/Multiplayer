@@ -1,5 +1,5 @@
 "use strict";
-//This file will eventually be compiled and run in the server directory. Thus, __dirname = /server
+//This file will eventually be compiled and run in the server directory. Thus, __dirname = "/server"
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,8 +8,8 @@ require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
-//this is the server root file directory (/server) relative to this file location.
-//This code must change when the file is executed from a different location
+if (!process.env)
+    throw "env is undefined. Try making a .env file?";
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
 });

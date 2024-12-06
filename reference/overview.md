@@ -52,10 +52,10 @@ However, scaling up the amount of values will make it much more difficult to man
 Using **JSON** notation, we will make an object with a bunch of named numbers. These are called **attributes**. Each attribute is defined as the name followed by the datatype.
 ```json
 "myStruct": {
-    someBool:"b",
-    x:"i32",
-    y:"i32",
-    z:"i32",
+    "someBool":"b",
+    "x":"i32",
+    "y":"i32",
+    "z":"i32",
 }
 ```
 Now, instead of outputing a list of numbers `[10, 200, 3000]`, we can give an object:
@@ -67,4 +67,4 @@ input = {
     z:3
 }
 ```
-**IMPORTANT: Note that both the protocol and the input have the same attribute names, but the protocol stores the datatypes and the input stores the actual values.**
+*IMPORTANT: Note that both the `protocol` and the `input` have the same attribute names, but the `protocol` stores the datatypes and the `input` stores the actual values.*
